@@ -1,58 +1,31 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { parse } from "react-native-rss-parser";
+import { parse, IFeed } from "react-native-rss-parser";
 import "./styles.css";
 
-interface IPodcastEpisode {
-  title: string;
-  links: string;
-  description: string;
-  content: string;
-  id: string;
-  authors: string[];
-  categories: string[];
-  published: string;
-  enclosures: any[];
-  itunes: any;
+const feeds = {
+  SyntaxFM: "https://feed.syntax.fm/rss",
+  TheBikeShed: "https://feeds.simplecast.com/ky3kewHN",
+  MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
 }
 
-interface IPodcastFeed {
-  type: string;
-  title: string;
-  links: string[];
-  description: string;
-  language: string;
-  copyright: string | undefined;
-  authors: string[];
-  lastUpdated: string;
-  lastPublished: string;
-  categories: string[];
-  image: {
-    description: undefined;
-    height: string | undefined;
-    title: string;
-    url: string;
-    width: string | undefined;
-  };
-  itunes: any;
-  items: IPodcastEpisode[];
-}
-function fetchRss(rssUrl: string, persistCallback) {
+function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetStateAction<IFeed>>) {
   fetch(rssUrl)
     .then(response => response.text())
     .then(parse)
-    // .then(persistCallback)
-    .then(x => {
-      console.log("x", Object.keys(x));
-      return x;
-    })
+    // .then((x) => {
+    //   console.log("feed", x);
+    //   console.log("item", x.items[0]);
+    //   return x;
+    // })
+    .then(persistCallback)
     .catch(console.error);
   return () => {};
 }
 function App() {
-  const [feed, setFeed] = React.useState<string>("podcast");
+  const [feed, setFeed] = React.useState<IFeed>({} as IFeed);
   React.useEffect(
-    () => fetchRss("https://feeds.simplecast.com/ky3kewHN", setFeed),
+    () => fetchRss(feeds.MamilosPod, setFeed),
     []
   );
   return (
