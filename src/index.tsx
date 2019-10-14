@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { parse, IFeed } from "react-native-rss-parser";
+import { parse, Feed } from "react-native-rss-parser";
 import "./styles.css";
 
 const feeds = {
@@ -9,7 +9,7 @@ const feeds = {
   MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
 }
 
-function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetStateAction<IFeed>>) {
+function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetStateAction<Feed>>) {
   fetch(rssUrl)
     .then(response => response.text())
     .then(parse)
@@ -23,9 +23,9 @@ function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetState
   return () => {};
 }
 function App() {
-  const [feed, setFeed] = React.useState<IFeed>({} as IFeed);
+  const [feed, setFeed] = React.useState<Feed>({} as Feed);
   React.useEffect(
-    () => fetchRss(feeds.MamilosPod, setFeed),
+    () => fetchRss(feeds.SyntaxFM, setFeed),
     []
   );
   return (
