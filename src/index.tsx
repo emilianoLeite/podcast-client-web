@@ -1,7 +1,9 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { parse, Feed } from "react-native-rss-parser";
+import { Button, Icon } from "semantic-ui-react";
 import "./styles.css";
+import 'semantic-ui-css/semantic.min.css'
 
 const feeds = {
   SyntaxFM: "https://feed.syntax.fm/rss",
@@ -31,6 +33,18 @@ function App() {
       <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>
       <p>{feed.title}</p>
+      <Button animated>
+        <Button.Content visible> Login </Button.Content>
+        <Button.Content hidden>
+          <Icon name='arrow right' />
+        </Button.Content>
+      </Button>
+      <Button>
+        <Button.Content visible>
+          <Icon name='google' />
+        </Button.Content>
+      </Button>
+      <Button content={<Icon name="google" />} />
     </div>
   );
 }
