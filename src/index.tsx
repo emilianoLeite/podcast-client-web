@@ -1,6 +1,9 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { parse, Feed } from "react-native-rss-parser";
+import { Router } from "@reach/router";
+
+import { Landing, Protected } from "./screens";
 import "./styles.css";
 
 const feeds = {
@@ -9,7 +12,10 @@ const feeds = {
   MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
 };
 
-function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetStateAction<Feed>>): () => void {
+function fetchRss(
+  rssUrl: string,
+  persistCallback: React.Dispatch<React.SetStateAction<Feed>>
+) {
   fetch(rssUrl)
     .then(response => response.text())
     .then(parse)
@@ -22,16 +28,16 @@ function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetState
     .catch(console.error); // eslint-disable-line no-console
   return () => {};
 }
+
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
   React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-      <p>{feed.title}</p>
-    </div>
+    <Router>
+      <Landing path="/" feed={feed} />
+      <Protected path="dashboard" />
+    </Router>
   );
 }
 
