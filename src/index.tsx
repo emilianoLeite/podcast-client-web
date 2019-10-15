@@ -36,7 +36,7 @@ function App() {
   return (
     <Router>
       <Landing path="/" feed={feed} />
-      <Protected path="dashboard" />
+      <Protected path="dashboard" isUserAuthenticated={true} />
     </Router>
   );
 }
