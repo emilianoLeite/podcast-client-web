@@ -7,9 +7,9 @@ const feeds = {
   SyntaxFM: "https://feed.syntax.fm/rss",
   TheBikeShed: "https://feeds.simplecast.com/ky3kewHN",
   MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
-}
+};
 
-function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetStateAction<Feed>>) {
+function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetStateAction<Feed>>): () => void {
   fetch(rssUrl)
     .then(response => response.text())
     .then(parse)
@@ -19,15 +19,13 @@ function fetchRss(rssUrl: string, persistCallback: React.Dispatch<React.SetState
     //   return x;
     // })
     .then(persistCallback)
-    .catch(console.error);
+    .catch(console.error); // eslint-disable-line no-console
   return () => {};
 }
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
-  React.useEffect(
-    () => fetchRss(feeds.SyntaxFM, setFeed),
-    []
-  );
+  React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
+
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
