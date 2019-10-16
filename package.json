@@ -1,9 +1,17 @@
 {
-  "name": "new",
+  "name": "podcast-client-web",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "src/index.tsx",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./**/*.ts*",
+    "lint:fix": "yarn lint --fix"
+  },
   "dependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -19,14 +27,6 @@
     "@typescript-eslint/parser": "^2.4.0",
     "eslint-plugin-react": "^7.16.0",
     "typescript": "^3.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint ./**/*.ts*",
-    "lint:fix": "yarn lint --fix"
   },
   "browserslist": [
     ">0.2%",
