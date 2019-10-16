@@ -2,7 +2,7 @@ version: 2
 jobs:
   quality_assurance:
     docker:
-      - image: circleci/node:11.9.0
+      - image: circleci/node:11.10.1
 
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
