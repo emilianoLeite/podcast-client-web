@@ -1,24 +1,22 @@
-import React from 'react'
+import React from "react";
 import { Link, Redirect, RouteComponentProps } from "@reach/router";
 
-interface Props extends RouteComponentProps {
-  isUserAuthenticated: boolean;
-};
+import AuthContext from "../context/Auth";
 
-const renderContent = () => (
-  <>
-    <h1> Generic Protected Route</h1>
-    <div>
-      <Link to="/">Back to Home</Link>
-    </div>
-  </>
-);
+const Protected: React.FC<RouteComponentProps> = () => {
+  const { loggedIn } = React.useContext(AuthContext);
 
-const Protected: React.FC<Props> = ({ isUserAuthenticated }) => {
-  if (isUserAuthenticated) {
-    return renderContent();
+  if (!loggedIn) {
+    return <Redirect to="/" />;
   } else {
-    return <Redirect to="/" />
+    return (
+      <React.Fragment>
+        <h1> Generic Protected Route</h1>
+        <div>
+          <Link to="/">Back to Home</Link>
+        </div>
+      </React.Fragment>
+    );
   }
 };
 
