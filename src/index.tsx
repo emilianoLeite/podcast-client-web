@@ -1,8 +1,10 @@
 import * as React from "react";
 import { render } from "react-dom";
+import { Router, navigate } from "@reach/router";
 import { parse, Feed } from "react-native-rss-parser";
-import { Router } from "@reach/router";
 
+import AuthContext from "./context/Auth";
+import Navbar from "./components/Navbar";
 import { Landing, Protected } from "./screens";
 import "./styles.css";
 
@@ -31,13 +33,26 @@ function fetchRss(
 
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
+  const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
+  const auth = {
+    loggedIn,
+    login: () => {
+      setLoggedIn(true);
+      navigate("/dashboard");
+    },
+    logout: () => setLoggedIn(false),
+  };
+
   return (
-    <Router>
-      <Landing path="/" feed={feed} />
-      <Protected path="dashboard" isUserAuthenticated={true} />
-    </Router>
+    <AuthContext.Provider value={auth}>
+      <Navbar/>
+      <Router>
+        <Landing path="/" feed={feed} />
+        <Protected path="/dashboard" />
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

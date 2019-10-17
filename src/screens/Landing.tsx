@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Feed } from "react-native-rss-parser";
 import { Link, RouteComponentProps } from "@reach/router";
 
 interface Props extends RouteComponentProps {
   feed: Feed;
-};
+}
 
 const Landing: React.FC<Props> = ({ feed }) => {
   return (
