@@ -24,6 +24,7 @@ module.exports = {
   },
   "plugins": [
     "react",
+    "react-hooks",
     "@typescript-eslint"
   ],
   "rules": {
@@ -44,5 +45,7 @@ module.exports = {
     "react/jsx-uses-vars": "error",
     "@typescript-eslint/unbound-method": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
   }
 };
