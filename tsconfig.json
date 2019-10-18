@@ -1,7 +1,6 @@
 {
   "include": [
-    "./src/*",
-    "src/typings/react-native-rss-parser"
+    "./src/*"
   ],
   "compilerOptions": {
     "lib": [
