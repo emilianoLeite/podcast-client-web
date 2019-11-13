@@ -3,9 +3,9 @@ import { render } from "react-dom";
 import { Router, navigate } from "@reach/router";
 import { parse, Feed } from "react-native-rss-parser";
 
-import AuthContext from "./context/Auth";
+import AuthContext, { AuthType } from "./context/Auth";
 import Navbar from "./components/Navbar";
-import { Landing, Protected } from "./screens";
+import { Landing, Home } from "./screens";
 import "./styles.css";
 
 const feeds = {
@@ -33,14 +33,17 @@ function fetchRss(
 
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
+  const [currentUser, setCurrentUser] = React.useState<AuthType["currentUser"]>();
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
   const auth = {
+    currentUser,
+    setCurrentUser,
     loggedIn,
     login: () => {
       setLoggedIn(true);
-      navigate("/dashboard");
+      navigate("/home");
     },
     logout: () => setLoggedIn(false),
   };
@@ -50,7 +53,7 @@ function App() {
       <Navbar/>
       <Router>
         <Landing path="/" feed={feed} />
-        <Protected path="/dashboard" />
+        <Home path="/home" />
       </Router>
     </AuthContext.Provider>
   );
