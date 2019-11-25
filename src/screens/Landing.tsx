@@ -2,13 +2,14 @@ import React from "react";
 import { Feed } from "react-native-rss-parser";
 import { Link, RouteComponentProps } from "@reach/router";
 import SearchInput from "../components/SearchInput";
+import Podcast from "../types/Podcast";
 
 interface Props extends RouteComponentProps {
   feed: Feed;
 }
 
 const Landing: React.FC<Props> = ({ feed }) => {
-  const [podcastsList, setPodcastsList ] = React.useState([])
+  const [podcastsList, setPodcastsList ] = React.useState<Podcast[]>([])
 
   return (
     <div>
