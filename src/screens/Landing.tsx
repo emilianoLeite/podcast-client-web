@@ -19,7 +19,9 @@ const Landing: React.FC<Props> = ({ feed }) => {
       </nav>
 
       <p>{feed.title}</p>
-      {podcastsList.map((podcast: any) => {return <p> 1. {podcast.title_original}</p>})}
+      <ul>
+        {podcastsList.map((podcast) => {return <li> {podcast.title_original}</li>})}
+      </ul>
     </div>
   );
 };
