@@ -9,7 +9,7 @@ interface Props extends RouteComponentProps {
 }
 
 const Landing: React.FC<Props> = ({ feed }) => {
-  const [podcastsList, setPodcastsList ] = React.useState<Podcast[]>([])
+  const [podcastsList, setPodcastsList] = React.useState<Podcast[]>([]);
 
   return (
     <div>
@@ -21,7 +21,7 @@ const Landing: React.FC<Props> = ({ feed }) => {
 
       <p>{feed.title}</p>
       <ul>
-        {podcastsList.map((podcast) => {return <li> {podcast.title_original}</li>})}
+        {podcastsList.map((podcast) => <li> {podcast.title_original} </li>)}
       </ul>
     </div>
   );

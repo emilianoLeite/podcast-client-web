@@ -1,9 +1,9 @@
 import React from "react";
 import Podcast from "../types/Podcast";
 
-const SearchInput: React.FC<{setPodcastsList: (podcasts: Podcast[]) => void}> = ({setPodcastsList}) => {
+const SearchInput: React.FC<{setPodcastsList: (podcasts: Podcast[]) => void}> = ({ setPodcastsList }) => {
 
-  const [searchTerm, setSearchTerm ] = React.useState("")
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
     <React.Fragment>
@@ -17,8 +17,8 @@ const SearchInput: React.FC<{setPodcastsList: (podcasts: Podcast[]) => void}> = 
               "Content-Type": "application/x-www-form-urlencoded",
             },
           })
-          .then((response) => response.json())
-          .then((parsedReponse : { results: Podcast[]} ) => setPodcastsList(parsedReponse.results))
+            .then((response) => response.json())
+            .then((parsedReponse: { results: Podcast[]} ) => setPodcastsList(parsedReponse.results));
         }
       }>Search</button>
     </React.Fragment>
