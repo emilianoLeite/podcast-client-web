@@ -4,9 +4,11 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import AuthContext from "../context/Auth";
 
 import { auth } from "../shared/Firebase";
+import { Redirect } from "react-router-dom";
 
-const FirebaseAuth: React.FC<{}> = () => {
-  const { login, setCurrentUser } = React.useContext(AuthContext);
+const FirebaseAuth: React.FC = () => {
+  const { login, loggedIn, setCurrentUser } = React.useContext(AuthContext);
+  const [redirectToHome, setRedirectToHome] = React.useState(false);
 
   const uiConfig = {
     signInFlow: "popup",
@@ -15,13 +17,22 @@ const FirebaseAuth: React.FC<{}> = () => {
     callbacks: {
       signInSuccessWithAuthResult: (result: { user: { uid: string } }) => {
         setCurrentUser(result.user);
+        setRedirectToHome(true);
         login();
         return false; // Avoid firebase's default redirect after successful sign-in.
-      },
-    },
+      }
+    }
   };
 
-  return <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />;
+  return loggedIn ? (
+    redirectToHome ? (
+      <Redirect to="/home" />
+    ) : (
+      <></>
+    )
+  ) : (
+    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+  );
 };
 
 export default FirebaseAuth;

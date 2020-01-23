@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { Router, navigate } from "@reach/router";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { parse, Feed } from "react-native-rss-parser";
 
 import AuthContext, { AuthType } from "./context/Auth";
@@ -11,7 +11,7 @@ import "./styles.css";
 const feeds = {
   SyntaxFM: "https://feed.syntax.fm/rss",
   TheBikeShed: "https://feeds.simplecast.com/ky3kewHN",
-  MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
+  MamilosPod: "https://feeds.simplecast.com/jfDMsRjh"
 };
 
 function fetchRss(
@@ -33,7 +33,9 @@ function fetchRss(
 
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
-  const [currentUser, setCurrentUser] = React.useState<AuthType["currentUser"]>();
+  const [currentUser, setCurrentUser] = React.useState<
+    AuthType["currentUser"]
+  >();
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
@@ -43,17 +45,24 @@ function App() {
     loggedIn,
     login: () => {
       setLoggedIn(true);
-      navigate("/home");
     },
-    logout: () => setLoggedIn(false),
+    logout: () => setLoggedIn(false)
   };
 
   return (
     <AuthContext.Provider value={auth}>
-      <Navbar/>
       <Router>
-        <Landing path="/" feed={feed} />
-        <Home path="/home" />
+        <Navbar />
+
+        <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
+
+          <Route path="/">
+            <Landing feed={feed} />
+          </Route>
+        </Switch>
       </Router>
     </AuthContext.Provider>
   );
