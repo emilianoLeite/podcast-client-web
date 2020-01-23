@@ -1,10 +1,10 @@
 import React from "react";
 import { Feed } from "react-native-rss-parser";
-import { Link, RouteComponentProps } from "@reach/router";
 import SearchInput from "../components/SearchInput";
 import Podcast from "../types/Podcast";
+import { Link } from "react-router-dom";
 
-interface Props extends RouteComponentProps {
+interface Props {
   feed: Feed;
 }
 
@@ -16,12 +16,14 @@ const Landing: React.FC<Props> = ({ feed }) => {
       <h1>Home</h1>
       <SearchInput setPodcastsList={setPodcastsList}></SearchInput>
       <nav>
-        <Link to="/">Home</Link> | <Link to="dashboard">Dashboard</Link>
+        <Link to="/">Home</Link> | <Link to="/home">Dashboard</Link>
       </nav>
 
       <p>{feed.title}</p>
       <ul>
-        {podcastsList.map((podcast) => <li> {podcast.title_original} </li>)}
+        {podcastsList.map(podcast => (
+          <li> {podcast.title_original} </li>
+        ))}
       </ul>
     </div>
   );
