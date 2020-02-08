@@ -1,14 +1,20 @@
 import { createContext } from "react";
 
-export interface AuthType {
-  currentUser: Maybe<{
+export interface Public {
+  login: (user: CurrentUser) => void;
+  loggedIn: boolean;
+}
+
+export interface Private {
+  currentUser: {
     uid: string;
     name?: string;
-  }>;
-  setCurrentUser: React.Dispatch<React.SetStateAction<AuthType["currentUser"]>>;
-  loggedIn: boolean;
-  login: () => void;
+  };
   logout: () => void;
 }
 
-export default createContext<AuthType>({} as AuthType);
+export type CurrentUser = Private["currentUser"];
+
+export const PublicContext = createContext<Public>({} as Public);
+
+export const PrivateContext = createContext<Private>({} as Private);
