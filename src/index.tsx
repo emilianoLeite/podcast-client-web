@@ -11,7 +11,7 @@ import "./styles.css";
 const feeds = {
   SyntaxFM: "https://feed.syntax.fm/rss",
   TheBikeShed: "https://feeds.simplecast.com/ky3kewHN",
-  MamilosPod: "https://feeds.simplecast.com/jfDMsRjh"
+  MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
 };
 
 function fetchRss(
@@ -28,7 +28,9 @@ function fetchRss(
     // })
     .then(persistCallback)
     .catch(console.error); // eslint-disable-line no-console
-  return () => {};
+  return () => {
+    return undefined;
+  };
 }
 
 function App() {
@@ -46,7 +48,7 @@ function App() {
     login: () => {
       setLoggedIn(true);
     },
-    logout: () => setLoggedIn(false)
+    logout: () => setLoggedIn(false),
   };
 
   return (
