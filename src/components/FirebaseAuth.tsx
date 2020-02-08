@@ -1,13 +1,13 @@
 import React from "react";
 import { auth as googleAuth } from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import AuthContext from "../context/Auth";
+import { PublicContext, PrivateContext } from "../context/Auth";
 
 import { auth } from "../shared/Firebase";
 import { Redirect } from "react-router-dom";
 
 const FirebaseAuth: React.FC = () => {
-  const { login, loggedIn, setCurrentUser } = React.useContext(AuthContext);
+  const { login, loggedIn } = React.useContext(PublicContext);
   const [redirectToHome, setRedirectToHome] = React.useState(false);
 
   const uiConfig = {
@@ -16,23 +16,31 @@ const FirebaseAuth: React.FC = () => {
     signInOptions: [googleAuth.GoogleAuthProvider.PROVIDER_ID],
     callbacks: {
       signInSuccessWithAuthResult: (result: { user: { uid: string } }) => {
-        setCurrentUser(result.user);
+        login(result.user);
         setRedirectToHome(true);
-        login();
         return false; // Avoid firebase's default redirect after successful sign-in.
-      }
-    }
+      },
+    },
   };
 
-  return loggedIn ? (
-    redirectToHome ? (
+  if (loggedIn) {
+    return redirectToHome ? (
       <Redirect to="/home" />
     ) : (
-      <></>
-    )
-  ) : (
-    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
-  );
+      <h1> Unreachable element - DEBUG IS THIS SHOWS ON SCREEN </h1>
+    );
+  } else {
+    // TODO:
+    // parece que este componente "se esconde" automaticamente após login com sucesso...
+    // investigar se é isso mesmo
+    return (
+      <StyledFirebaseAuth
+        uiCallback={ui => ui.disableAutoSignIn()}
+        uiConfig={uiConfig}
+        firebaseAuth={auth}
+      />
+    );
+  }
 };
 
 export default FirebaseAuth;

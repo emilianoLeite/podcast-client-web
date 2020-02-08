@@ -1,9 +1,6 @@
 import React from "react";
 
-import AuthContext from "../context/Auth";
-import { database } from "../shared/Firebase";
 import { User } from "../shared/User";
-import { RouteComponentProps, Redirect } from "react-router-dom";
 
 interface Podcast {
   title: string;
@@ -24,18 +21,18 @@ function podscastsList(podcasts: Podcast[]) {
 }
 
 const Home: React.FC = () => {
-  const { loggedIn, currentUser } = React.useContext(AuthContext);
+  // const { currentUser } = React.useContext(PrivateContext);
   const [podcasts, setPodcasts] = React.useState<Podcast[]>([]);
   const [userData, setUserData] = React.useState<User>();
 
-  React.useEffect(() => {
-    if (currentUser && currentUser.uid) {
-      return database
-        .collection("users")
-        .doc(currentUser.uid)
-        .onSnapshot(doc => setUserData(doc.data() as User));
-    }
-  }, [currentUser]);
+  // React.useEffect(() => {
+  //   if (currentUser && currentUser.uid) {
+  //     return database
+  //       .collection("users")
+  //       .doc(currentUser.uid)
+  //       .onSnapshot(doc => setUserData(doc.data() as User));
+  //   }
+  // }, [currentUser]);
 
   React.useEffect(() => {
     if (userData && userData.podcasts_ids && userData.podcasts_ids.length > 0) {
@@ -53,16 +50,16 @@ const Home: React.FC = () => {
     }
   }, [userData]);
 
-  if (!loggedIn) {
-    return <Redirect to="/" />;
-  } else {
-    return (
-      <React.Fragment>
-        <h1> Welcome! </h1>
-        {podcasts.length > 0 ? podscastsList(podcasts) : noPodcastsMesssage()}
-      </React.Fragment>
-    );
-  }
+  // if (!currentUser) {
+  //   return <Redirect to="/" />;
+  // } else {
+  return (
+    <React.Fragment>
+      <h1> Welcome! </h1>
+      {podcasts.length > 0 ? podscastsList(podcasts) : noPodcastsMesssage()}
+    </React.Fragment>
+  );
+  // }
 };
 
 export default Home;

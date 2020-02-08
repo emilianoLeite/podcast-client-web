@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { parse, Feed } from "react-native-rss-parser";
 
-import AuthContext, { AuthType } from "./context/Auth";
+import { PublicContext, CurrentUser, PrivateContext } from "./context/Auth";
 import Navbar from "./components/Navbar";
 import { Landing, Home } from "./screens";
 import "./styles.css";
@@ -35,38 +35,45 @@ function fetchRss(
 
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
-  const [currentUser, setCurrentUser] = React.useState<
-    AuthType["currentUser"]
-  >();
+  const [currentUser, setCurrentUser] = React.useState<CurrentUser | null>(
+    null
+  );
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
-  const auth = {
-    currentUser,
+  const publicAuth = {
     setCurrentUser,
-    loggedIn,
-    login: () => {
+    login: (user: CurrentUser) => {
+      setCurrentUser(user);
       setLoggedIn(true);
     },
-    logout: () => setLoggedIn(false),
+    loggedIn,
   };
 
   return (
-    <AuthContext.Provider value={auth}>
+    <PublicContext.Provider value={publicAuth}>
       <Router>
         <Navbar />
 
         <Switch>
-          <Route path="/home">
-            <Home />
+          <Route exact path="/">
+            <Landing feed={feed} />
           </Route>
-
-          <Route path="/">
+          {currentUser && (
+            <PrivateContext.Provider
+              value={{ currentUser, logout: () => setCurrentUser(null) }}
+            >
+              <Route path="/home">
+                <Home />
+              </Route>
+            </PrivateContext.Provider>
+          )}
+          <Route path="*">
             <Landing feed={feed} />
           </Route>
         </Switch>
       </Router>
-    </AuthContext.Provider>
+    </PublicContext.Provider>
   );
 }
 
