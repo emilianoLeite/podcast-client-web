@@ -1,14 +1,13 @@
 import React from "react";
 import { auth as googleAuth } from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { PublicContext, PrivateContext } from "../context/Auth";
+import { PublicContext } from "../context/Auth";
 
 import { auth } from "../shared/Firebase";
 import { Redirect } from "react-router-dom";
 
 const FirebaseAuth: React.FC = () => {
   const { login, loggedIn } = React.useContext(PublicContext);
-  const [redirectToHome, setRedirectToHome] = React.useState(false);
 
   const uiConfig = {
     signInFlow: "popup",
@@ -17,18 +16,15 @@ const FirebaseAuth: React.FC = () => {
     callbacks: {
       signInSuccessWithAuthResult: (result: { user: { uid: string } }) => {
         login(result.user);
-        setRedirectToHome(true);
         return false; // Avoid firebase's default redirect after successful sign-in.
       },
     },
   };
 
   if (loggedIn) {
-    return redirectToHome ? (
-      <Redirect to="/home" />
-    ) : (
-      <h1> Unreachable element - DEBUG IS THIS SHOWS ON SCREEN </h1>
-    );
+    // isso só redireciona uma vez, apesar de parecer que este componente não
+    // deixa de ser renderizado, uma vez que o`loggedIn` fica true "pra sempre"
+    return <Redirect to="/home" />;
   } else {
     // TODO:
     // parece que este componente "se esconde" automaticamente após login com sucesso...
