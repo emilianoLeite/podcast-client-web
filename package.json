@@ -10,7 +10,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./**/*.ts*",
+    "lint": "eslint  --ext .tsx --ext .ts ./src",
     "lint:fix": "yarn lint --fix"
   },
   "husky": {
@@ -21,13 +21,13 @@
   },
   "dependencies": {
     "firebase": "^7.2.1",
-    "husky": "^4.0.0-beta.3",
-    "react": "^16.9.0",
+    "husky": "latest",
+    "react": "latest",
     "react-dom": "^16.9.0",
     "react-firebaseui": "^4.0.0",
     "react-native-rss-parser": "1.4.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^2.1.3"
+    "react-scripts": "latest"
   },
   "devDependencies": {
     "@types/node": "^12.11.1",
@@ -39,7 +39,7 @@
     "@typescript-eslint/parser": "^2.4.0",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
-    "typescript": "^3.3.3"
+    "typescript": "latest"
   },
   "browserslist": [
     ">0.2%",
