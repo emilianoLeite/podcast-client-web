@@ -1,6 +1,8 @@
 import React from "react";
 
 import { User } from "../shared/User";
+import { database } from "../shared/Firebase";
+import { PrivateContext } from "../context/Auth";
 
 interface Podcast {
   title: string;
@@ -21,18 +23,17 @@ function podscastsList(podcasts: Podcast[]) {
 }
 
 const Home: React.FC = () => {
-  // const { currentUser } = React.useContext(PrivateContext);
+  const { currentUser } = React.useContext(PrivateContext);
   const [podcasts, setPodcasts] = React.useState<Podcast[]>([]);
   const [userData, setUserData] = React.useState<User>();
 
-  // React.useEffect(() => {
-  //   if (currentUser && currentUser.uid) {
-  //     return database
-  //       .collection("users")
-  //       .doc(currentUser.uid)
-  //       .onSnapshot(doc => setUserData(doc.data() as User));
-  //   }
-  // }, [currentUser]);
+  React.useEffect(() => {
+    return database
+      .collection("users")
+      .doc(currentUser.uid)
+      .onSnapshot(doc => setUserData(doc.data() as User));
+
+  });
 
   React.useEffect(() => {
     if (userData && userData.podcasts_ids && userData.podcasts_ids.length > 0) {
@@ -40,9 +41,9 @@ const Home: React.FC = () => {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
           "X-ListenAPI-Key": "bf15efdf2c5d4c3fbf07529180de1fc5",
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `ids=${userData.podcasts_ids.join(",")}`
+        body: `ids=${userData.podcasts_ids.join(",")}`,
       })
         .then(response => response.json())
         .then(parsedResponse => parsedResponse.podcasts)
@@ -50,16 +51,12 @@ const Home: React.FC = () => {
     }
   }, [userData]);
 
-  // if (!currentUser) {
-  //   return <Redirect to="/" />;
-  // } else {
   return (
     <React.Fragment>
       <h1> Welcome! </h1>
       {podcasts.length > 0 ? podscastsList(podcasts) : noPodcastsMesssage()}
     </React.Fragment>
   );
-  // }
 };
 
 export default Home;
