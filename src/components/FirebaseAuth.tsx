@@ -14,8 +14,8 @@ const FirebaseAuth: React.FC = () => {
     signInSuccessUrl: "", // not used
     signInOptions: [googleAuth.GoogleAuthProvider.PROVIDER_ID],
     callbacks: {
-      signInSuccessWithAuthResult: (result: { user: { uid: string } }) => {
-        login(result.user);
+      signInSuccessWithAuthResult: ({ user }: { user: { uid: string } }) => {
+        login(user);
         return false; // Avoid firebase's default redirect after successful sign-in.
       },
     },
