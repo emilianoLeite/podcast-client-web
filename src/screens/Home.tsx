@@ -32,18 +32,19 @@ const Home: React.FC = () => {
       .collection("users")
       .doc(currentUser.uid)
       .onSnapshot(doc => setUserData(doc.data() as User));
-
   });
 
   React.useEffect(() => {
-    if (userData && userData.podcasts_ids && userData.podcasts_ids.length > 0) {
+    const podcastsIds = userData?.podcasts_ids || [];
+    if (podcastsIds.length > 0) {
       fetch("https://listen-api.listennotes.com/api/v2/podcasts", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
+          // TODO: dynamically get this value. Maybe save in firebase?
           "X-ListenAPI-Key": "bf15efdf2c5d4c3fbf07529180de1fc5",
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `ids=${userData.podcasts_ids.join(",")}`,
+        body: `ids=${podcastsIds.join(",")}`,
       })
         .then(response => response.json())
         .then(parsedResponse => parsedResponse.podcasts)
