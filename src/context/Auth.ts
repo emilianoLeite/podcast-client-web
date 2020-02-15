@@ -2,6 +2,7 @@ import { createContext } from "react";
 
 export interface Public {
   login: (user: CurrentUser) => void;
+  // necessary to redirect from Public to Private route upon login
   loggedIn: boolean;
 }
 
