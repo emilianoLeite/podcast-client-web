@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       .collection("users")
       .doc(currentUser.uid)
       .onSnapshot(doc => setUserData(doc.data() as User));
-  });
+  }, [currentUser.uid]);
 
   React.useEffect(() => {
     const podcastsIds = userData?.podcasts_ids || [];
