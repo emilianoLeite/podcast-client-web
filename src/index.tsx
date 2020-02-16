@@ -35,20 +35,22 @@ function fetchRss(
 
 function App() {
   const [feed, setFeed] = React.useState<Feed>({} as Feed);
-  const [currentUser, setCurrentUser] = React.useState<CurrentUser | null>(
-    null
-  );
+  const [currentUser, setCurrentUser] = React.useState<CurrentUser | null>(null);
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
+
   React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
-  const publicAuth = {
-    setCurrentUser,
-    login: (user: CurrentUser) => {
-      setCurrentUser(user);
-      setLoggedIn(true);
-    },
-    loggedIn,
+  const login = (user: CurrentUser) => {
+    setCurrentUser(user);
+    setLoggedIn(true);
   };
+
+  const logout = () => {
+    setCurrentUser(null);
+    setLoggedIn(false);
+  };
+
+  const publicAuth = { setCurrentUser, login, loggedIn };
 
   return (
     <PublicContext.Provider value={publicAuth}>
@@ -60,9 +62,7 @@ function App() {
             <Landing feed={feed} />
           </Route>
           {currentUser && (
-            <PrivateContext.Provider
-              value={{ currentUser, logout: () => setCurrentUser(null) }}
-            >
+            <PrivateContext.Provider value={{ currentUser, logout }}>
               <Route path="/home">
                 <Home />
               </Route>
