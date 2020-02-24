@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { parse, Feed } from "react-native-rss-parser";
 
 import { PublicContext, CurrentUser, PrivateContext } from "./context/Auth";
-import Navbar from "./components/Navbar";
-import { Landing, Home } from "./screens";
+import Navbar from "./components/dumb/Navbar";
+import { Landing, Home } from "./components/smart";
 import "./styles.css";
 
 const feeds = {

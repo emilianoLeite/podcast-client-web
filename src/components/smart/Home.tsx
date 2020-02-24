@@ -1,8 +1,8 @@
 import React from "react";
 
-import { User } from "../shared/User";
-import { database } from "../shared/Firebase";
-import { PrivateContext } from "../context/Auth";
+import { currentUserRecord } from "../../shared/firebase";
+import { User } from "../../shared/firebase/entities";
+import { PrivateContext } from "../../context/Auth";
 
 interface Podcast {
   title: string;
@@ -28,10 +28,9 @@ const Home: React.FC = () => {
   const [userData, setUserData] = React.useState<User>();
 
   React.useEffect(() => {
-    return database
-      .collection("users")
-      .doc(currentUser.uid)
-      .onSnapshot(doc => setUserData(doc.data() as User));
+    return currentUserRecord(currentUser.uid).onSnapshot(
+      doc => setUserData(doc.data() as User)
+    );
   }, [currentUser.uid]);
 
   React.useEffect(() => {
