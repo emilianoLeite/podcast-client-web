@@ -26,9 +26,8 @@ const FirebaseAuth: React.FC = () => {
     // deixa de ser renderizado, uma vez que o`loggedIn` fica true "pra sempre"
     return <Redirect to="/home" />;
   } else {
-    // TODO:
-    // parece que este componente "se esconde" automaticamente após login com sucesso...
-    // investigar se é isso mesmo
+    // TODO: investigate *how* the component hides itself. Additionally, figure
+    // out if we can control this behaviour.
     return (
       <StyledFirebaseAuth
         uiCallback={ui => ui.disableAutoSignIn()}
