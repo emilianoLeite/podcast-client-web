@@ -24,27 +24,29 @@ function App() {
   const publicAuth = { currentUser, setCurrentUser, login, loggedIn };
 
   return (
-    <PublicContext.Provider value={publicAuth}>
-      <Router>
-        <Navbar />
+    <React.StrictMode>
+      <PublicContext.Provider value={publicAuth}>
+        <Router>
+          <Navbar />
 
-        <Switch>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-          {currentUser && (
-            <PrivateContext.Provider value={{ currentUser, logout }}>
-              <Route path="/home">
-                <Home />
-              </Route>
-            </PrivateContext.Provider>
-          )}
-          <Route path="*">
-            <Landing />
-          </Route>
-        </Switch>
-      </Router>
-    </PublicContext.Provider>
+          <Switch>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            {currentUser && (
+              <PrivateContext.Provider value={{ currentUser, logout }}>
+                <Route path="/home">
+                  <Home />
+                </Route>
+              </PrivateContext.Provider>
+            )}
+            <Route path="*">
+              <Landing />
+            </Route>
+          </Switch>
+        </Router>
+      </PublicContext.Provider>
+    </React.StrictMode>
   );
 }
 
