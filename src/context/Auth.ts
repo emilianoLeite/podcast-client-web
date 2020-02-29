@@ -1,11 +1,5 @@
 import { createContext } from "react";
 
-export interface Public {
-  login: (user: CurrentUser) => void;
-  // necessary to redirect from Public to Private route upon login
-  loggedIn: boolean;
-}
-
 export interface Private {
   currentUser: {
     uid: string;
@@ -15,6 +9,12 @@ export interface Private {
 }
 
 export type CurrentUser = Private["currentUser"];
+
+export interface Public {
+  login: (user: CurrentUser) => void;
+  loggedIn: boolean; // necessary to redirect from Public to Private route upon login
+  currentUser: Maybe<CurrentUser>; // necessary to "enhance" Public pages with logged-in functionality
+}
 
 export const PublicContext = createContext<Public>({} as Public);
 
