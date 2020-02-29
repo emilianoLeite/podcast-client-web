@@ -50,7 +50,7 @@ function App() {
     setLoggedIn(false);
   };
 
-  const publicAuth = { setCurrentUser, login, loggedIn };
+  const publicAuth = { currentUser, setCurrentUser, login, loggedIn };
 
   return (
     <PublicContext.Provider value={publicAuth}>
