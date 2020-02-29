@@ -8,7 +8,7 @@ import { Landing, Home } from "./components/smart";
 import "./styles.css";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState<CurrentUser | null>(null);
+  const [currentUser, setCurrentUser] = React.useState<CurrentUser>();
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
 
   const login = (user: CurrentUser) => {
@@ -17,7 +17,7 @@ function App() {
   };
 
   const logout = () => {
-    setCurrentUser(null);
+    setCurrentUser(undefined);
     setLoggedIn(false);
   };
 
