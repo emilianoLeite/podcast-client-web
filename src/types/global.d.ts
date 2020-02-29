@@ -1,1 +1,1 @@
-type Maybe<T> = T | undefined;
+type Maybe<T> = T | undefined | null;
