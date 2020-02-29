@@ -1,44 +1,15 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { parse, Feed } from "react-native-rss-parser";
 
 import { PublicContext, CurrentUser, PrivateContext } from "./context/Auth";
 import Navbar from "./components/dumb/Navbar";
 import { Landing, Home } from "./components/smart";
 import "./styles.css";
 
-const feeds = {
-  SyntaxFM: "https://feed.syntax.fm/rss",
-  TheBikeShed: "https://feeds.simplecast.com/ky3kewHN",
-  MamilosPod: "https://feeds.simplecast.com/jfDMsRjh",
-};
-
-function fetchRss(
-  rssUrl: string,
-  persistCallback: React.Dispatch<React.SetStateAction<Feed>>
-) {
-  fetch(rssUrl)
-    .then(response => response.text())
-    .then(parse)
-    // .then((x) => {
-    //   console.log("feed", x);
-    //   console.log("item", x.items[0]);
-    //   return x;
-    // })
-    .then(persistCallback)
-    .catch(console.error); // eslint-disable-line no-console
-  return () => {
-    return undefined;
-  };
-}
-
 function App() {
-  const [feed, setFeed] = React.useState<Feed>({} as Feed);
   const [currentUser, setCurrentUser] = React.useState<CurrentUser | null>(null);
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
-
-  React.useEffect(() => fetchRss(feeds.SyntaxFM, setFeed), []);
 
   const login = (user: CurrentUser) => {
     setCurrentUser(user);
@@ -59,7 +30,7 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Landing feed={feed} />
+            <Landing />
           </Route>
           {currentUser && (
             <PrivateContext.Provider value={{ currentUser, logout }}>
@@ -69,7 +40,7 @@ function App() {
             </PrivateContext.Provider>
           )}
           <Route path="*">
-            <Landing feed={feed} />
+            <Landing />
           </Route>
         </Switch>
       </Router>
