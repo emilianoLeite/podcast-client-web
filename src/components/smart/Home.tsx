@@ -9,6 +9,7 @@ interface Podcast {
 }
 
 function noPodcastsMesssage() {
+  // TODO: Arrumar este "flicker" com React.Suspense
   return <h2> Você não está inscrito em nenhum podcast </h2>;
 }
 
