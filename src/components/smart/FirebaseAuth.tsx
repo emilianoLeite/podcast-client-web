@@ -30,7 +30,7 @@ const FirebaseAuth: React.FC = () => {
     // out if we can control this behaviour.
     return (
       <StyledFirebaseAuth
-        uiCallback={ui => ui.disableAutoSignIn()}
+        // uiCallback={ui => ui.disableAutoSignIn()}
         uiConfig={uiConfig}
         firebaseAuth={auth}
       />
