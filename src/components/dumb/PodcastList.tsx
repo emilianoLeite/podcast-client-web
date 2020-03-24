@@ -1,9 +1,9 @@
 import React from "react";
-import Podcast from "../../types/Podcast";
+import { PodcastSearchResults } from "../../types/Podcast";
 
 interface Props {
-  podcasts: Podcast[];
-  handleSubscription?: (podcast: Podcast) => unknown;
+  podcasts: PodcastSearchResults[];
+  handleSubscription?: (podcast: PodcastSearchResults) => unknown;
 }
 
 const PodcastList: React.FC<Props> = ({ podcasts, handleSubscription }) => {

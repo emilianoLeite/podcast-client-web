@@ -3,9 +3,12 @@ import React from "react";
 import { currentUserRecord } from "../../shared/firebase";
 import { User } from "../../shared/firebase/entities";
 import { PrivateContext } from "../../context/Auth";
+import { Link } from "react-router-dom";
+import { PodcastSearchResults } from "../../types/Podcast";
 
 interface Podcast {
-  title: string;
+  id: string;
+  title_original: string;
 }
 
 function noPodcastsMesssage() {
@@ -16,8 +19,10 @@ function noPodcastsMesssage() {
 function podscastsList(podcasts: Podcast[]) {
   return (
     <ul>
-      {podcasts.map((podcast, i) => (
-        <li key={i}>{podcast.title}</li>
+      {podcasts.map((podcast) => (
+        <Link to={`${podcast.id}/show`} key={podcast.id}>
+          <li>{podcast.title_original}</li>
+        </Link>
       ))}
     </ul>
   );
@@ -25,7 +30,7 @@ function podscastsList(podcasts: Podcast[]) {
 
 const Home: React.FC = () => {
   const { currentUser } = React.useContext(PrivateContext);
-  const [podcasts, setPodcasts] = React.useState<Podcast[]>([]);
+  const [podcasts, setPodcasts] = React.useState<PodcastSearchResults[]>([]);
   const [userData, setUserData] = React.useState<User>();
 
   React.useEffect(() => {
