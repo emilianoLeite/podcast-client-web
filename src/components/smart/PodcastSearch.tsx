@@ -1,8 +1,8 @@
 import React from "react";
-import { PodcastSearchResults } from "../../types/Podcast";
+import { PodcastDetails } from "../../types/Podcast";
 
 interface Props {
-  handleSearchResults: (podcasts: PodcastSearchResults[]) => void;
+  handleSearchResults: (podcasts: PodcastDetails[]) => void;
 }
 
 const PodcastSearch: React.FC<Props> = ({ handleSearchResults }) => {
@@ -21,7 +21,7 @@ const PodcastSearch: React.FC<Props> = ({ handleSearchResults }) => {
           },
         })
           .then(response => response.json())
-          .then(parsedResponse => parsedResponse.results as PodcastSearchResults[])
+          .then(parsedResponse => parsedResponse.results as PodcastDetails[])
           .then(handleSearchResults);
       }}>
         Search
