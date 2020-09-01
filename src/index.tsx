@@ -6,6 +6,7 @@ import { PublicContext, CurrentUser, PrivateContext } from "./context/Auth";
 import Navbar from "./components/dumb/Navbar";
 import { Landing, Home } from "./components/smart";
 import "./styles.css";
+import PodcastShow from "./components/smart/PodcastShow";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState<CurrentUser>();
@@ -40,6 +41,10 @@ function App() {
                 </Route>
               </PrivateContext.Provider>
             )}
+            <Route path="/podcasts/:id">
+              <PodcastShow/>
+            </Route>
+
             <Route path="*">
               <Landing />
             </Route>

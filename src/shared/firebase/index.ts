@@ -1,7 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { PodcastSearchResults } from "../../types/Podcast";
+import { PodcastDetails } from "../../types/Podcast";
 import { User } from "./entities";
 
 const firebaseInstance = firebase.initializeApp({
@@ -54,7 +54,7 @@ export const currentUserRecord = (userAuthId: firebase.User["uid"]) => {
 // Por enquanto estou deixando isso "explícito" somente no userConverter acima
 
 
-export const subscribe = (podcast: PodcastSearchResults, userId: User["id"]) => {
+export const subscribe = (podcast: PodcastDetails, userId: User["id"]) => {
   currentUserRecord(userId).update({
     podcasts_ids: firebase.firestore.FieldValue.arrayUnion(podcast.id),
   });
