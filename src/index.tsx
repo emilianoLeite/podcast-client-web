@@ -34,6 +34,11 @@ function App() {
             <Route exact path="/">
               <Landing />
             </Route>
+
+            <Route exact path="/podcasts/:id">
+              <PodcastShow/>
+            </Route>
+
             {currentUser && (
               <PrivateContext.Provider value={{ currentUser, logout }}>
                 <Route path="/home">
@@ -41,9 +46,6 @@ function App() {
                 </Route>
               </PrivateContext.Provider>
             )}
-            <Route path="/podcasts/:id">
-              <PodcastShow/>
-            </Route>
 
             <Route path="*">
               <Landing />

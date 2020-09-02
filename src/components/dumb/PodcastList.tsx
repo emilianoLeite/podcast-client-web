@@ -1,9 +1,9 @@
 import React from "react";
-import { PodcastDetails } from "../../types/Podcast";
+import { PodcastSearchResult } from "../../types/Podcast";
 
 interface Props {
-  podcasts: PodcastDetails[];
-  handleSubscription?: (podcast: PodcastDetails) => unknown;
+  podcasts: PodcastSearchResult["results"];
+  handleSubscription?: (podcast: PodcastSearchResult["results"][0]) => void;
 }
 
 const PodcastList: React.FC<Props> = ({ podcasts, handleSubscription }) => {
@@ -11,7 +11,7 @@ const PodcastList: React.FC<Props> = ({ podcasts, handleSubscription }) => {
     <ul>
       {podcasts.map(podcast => (
         <React.Fragment key={podcast.id}>
-          <li> {podcast.title} </li>
+          <li> {podcast.title_original} </li>
           {handleSubscription && (
             <button onClick={() => handleSubscription(podcast)}>
               Subscribe
