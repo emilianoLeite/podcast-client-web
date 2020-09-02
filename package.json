@@ -8,16 +8,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test src/ --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint  --ext .tsx --ext .ts ./src",
     "lint:fix": "yarn lint --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint",
-      "pre-push": "yarn jest --passWithNoTests"
-    }
   },
   "dependencies": {
     "firebase": "^7.2.1",
@@ -42,6 +36,14 @@
     "eslint-plugin-react-hooks": "^2.1.2",
     "typescript": "latest"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn test --passWithNoTests --watchAll=false"
+    }
+  },
+
+
   "browserslist": [
     ">0.2%",
     "not dead",
