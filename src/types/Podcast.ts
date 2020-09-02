@@ -146,3 +146,64 @@ export interface PodcastDetails {
   /** Passed to the **next_episode_pub_date** parameter of `GET /podcasts/{id}` to paginate through episodes of that podcast. */
   next_episode_pub_date: number;
 }
+
+export interface PodcastSearchResult {
+  count: number;
+  next_offset: number;
+  results: {
+    /** Podcast id. */
+    id: string;
+
+    /** RSS url of this podcast. This field is available only in the PRO plan. */
+    rss: string;
+
+    /** The email of this podcast's producer. This field is available only in the PRO plan. */
+    email: string;
+
+    /** Image url for this podcast's artwork. If you are using PRO plan, then it's\na high resolution image (1400x1400). If you are using FREE plan, then it's the same as **thumbnail**,\nlow resolution image (300x300). */
+    image: string;
+
+    /** Website url of this podcast. */
+    website: string;
+
+    /** Genre ids. */
+    genre_ids:  number[];
+    /** iTunes id for this podcast. */
+    itunes_id: number;
+    /** Thumbnail image url for this podcast's artwork (300x300). */
+    thumbnail: string;
+
+    /** Plain text of podcast name. */
+    title_original: string;
+
+    /** Total number of episodes in this podcast. */
+    total_episodes: number;
+
+    /** The url of this podcast on [ListenNotes.com](https://www.ListenNotes.com). */
+    listennotes_url: string;
+
+    /** Whether this podcast contains explicit language. */
+    explicit_content: boolean;
+
+    /** Highlighted segment of podcast name. */
+    title_highlighted: string;
+
+    /** The published date of the latest episode of this podcast. In milliseconds */
+    latest_pub_date_ms: number;
+
+    /** Plain text of this podcast's publisher name. */
+    publisher_original: string;
+
+    /** Plain text of podcast description */
+    description_original: string;
+
+    /** The published date of the oldest episode of this podcast. In milliseconds */
+    earliest_pub_date_ms: number;
+
+    /** Highlighted segment of this podcast's publisher name. */
+    publisher_highlighted: string;
+
+    /** Highlighted segment of podcast description */
+    description_highlighted: string;
+  }[];
+}

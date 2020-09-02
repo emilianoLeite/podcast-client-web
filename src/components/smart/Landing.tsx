@@ -2,14 +2,14 @@ import React from "react";
 
 import PodcastSearch from "./PodcastSearch";
 import PodcastList from "../dumb/PodcastList";
-import { PodcastDetails } from "../../types/Podcast";
+import { PodcastSearchResult } from "../../types/Podcast";
 import { subscribe } from "../../shared/firebase";
 import { PublicContext, Public } from "../../context/Auth";
 
 
 const podcastList = (
   currentUser: Public["currentUser"],
-  podcastsList: PodcastDetails[]
+  podcastsList: PodcastSearchResult["results"]
 ): JSX.Element => {
   if (currentUser) {
     return (
@@ -24,7 +24,7 @@ const podcastList = (
 };
 
 const Landing: React.FC = () => {
-  const [podcastsList, setPodcastsList] = React.useState<PodcastDetails[]>([]);
+  const [podcastsList, setPodcastsList] = React.useState<PodcastSearchResult["results"]>([]);
   const { currentUser } = React.useContext(PublicContext);
 
   return (

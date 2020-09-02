@@ -20,7 +20,17 @@ const PodcastShow = () => {
       .then(setPodcast);
   }, [id]);
 
-  return podcast ? <h1> {podcast.title} </h1> : <h3> Loading... </h3>;
+  return podcast ? <>
+    <h1> {podcast.title} </h1>
+    <p>{podcast.description}</p>
+    <h2> Latest episodes </h2>
+    <ul>
+      {podcast.episodes.slice(0, 10).map((episode) => (
+        <li key={episode.id}> [{new Date(episode.pub_date_ms).toLocaleDateString()}] {episode.title} </li>
+      ))}
+    </ul>
+  </>
+    : <h3> Loading... </h3>;
 };
 
 export default PodcastShow;
