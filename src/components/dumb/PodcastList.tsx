@@ -11,7 +11,7 @@ const PodcastList: React.FC<Props> = ({ podcasts, handleSubscription }) => {
     <ul>
       {podcasts.map(podcast => (
         <React.Fragment key={podcast.id}>
-          <li> {podcast.title_original} </li>
+          <li data-testid={`list-item-${podcast.id}`}> {podcast.title_original} </li>
           {handleSubscription && (
             <button onClick={() => handleSubscription(podcast)}>
               Subscribe
