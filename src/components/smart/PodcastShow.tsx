@@ -2,6 +2,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { PodcastDetails } from "../../types/Podcast";
+import { msToLocaleString } from "../../shared/utils/date";
 
 
 // TODO: receive podcast as prop
@@ -20,16 +21,16 @@ const PodcastShow = () => {
       .then(setPodcast);
   }, [id]);
 
-  return podcast ? <>
+  return podcast ? <React.Fragment>
     <h1> {podcast.title} </h1>
     <p>{podcast.description}</p>
     <h2> Latest episodes </h2>
     <ul>
       {podcast.episodes.slice(0, 10).map((episode) => (
-        <li key={episode.id}> [{new Date(episode.pub_date_ms).toLocaleDateString()}] {episode.title} </li>
+        <li key={episode.id}> [{msToLocaleString(episode.pub_date_ms)}] {episode.title} </li>
       ))}
     </ul>
-  </>
+  </React.Fragment>
     : <h3> Loading... </h3>;
 };
 

@@ -167,9 +167,11 @@ export interface PodcastSearchResult {
     website: string;
 
     /** Genre ids. */
-    genre_ids:  number[];
+    genre_ids: number[];
+
     /** iTunes id for this podcast. */
     itunes_id: number;
+
     /** Thumbnail image url for this podcast's artwork (300x300). */
     thumbnail: string;
 

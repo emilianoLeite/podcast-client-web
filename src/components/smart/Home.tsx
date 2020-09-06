@@ -3,31 +3,12 @@ import React from "react";
 import { currentUserRecord } from "../../shared/firebase";
 import { User } from "../../shared/firebase/entities";
 import { PrivateContext } from "../../context/Auth";
-import { Link } from "react-router-dom";
 import { PodcastDetails } from "../../types/Podcast";
-
-interface Podcast {
-  id: string;
-  title: string;
-}
+import { SubscribedPodcasts } from "../dumb/SubscribedPodcasts";
 
 function noPodcastsMesssage() {
   // TODO: Arrumar este "flicker" com React.Suspense
   return <h2> Você não está inscrito em nenhum podcast </h2>;
-}
-
-function podscastsList(podcasts: Podcast[]) {
-  return (
-    <ul>
-      {podcasts.map((podcast) => (
-        <li key={podcast.id}>
-          <Link to={`/podcasts/${podcast.id}`} key={podcast.id}>
-            {podcast.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
 }
 
 function fetchPodcast(podcastId: string) {
@@ -65,7 +46,7 @@ const Home: React.FC = () => {
   return (
     <React.Fragment>
       <h1> Welcome! </h1>
-      {podcasts.length > 0 ? podscastsList(podcasts) : noPodcastsMesssage()}
+      {podcasts.length > 0 ? <SubscribedPodcasts podcasts={podcasts} /> : noPodcastsMesssage() }
     </React.Fragment>
   );
 };
