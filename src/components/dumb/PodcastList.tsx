@@ -8,7 +8,7 @@ interface Props {
 
 const PodcastList: React.FC<Props> = ({ podcasts, handleSubscription }) => {
   return (
-    <ul>
+    <ul data-testid="podcast-list">
       {podcasts.map(podcast => (
         <React.Fragment key={podcast.id}>
           <li data-testid={`list-item-${podcast.id}`}> {podcast.title_original} </li>

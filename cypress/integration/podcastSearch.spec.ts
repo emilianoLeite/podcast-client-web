@@ -14,6 +14,10 @@ describe('When searching for podcasts', () => {
 
       cy.contains('Search').click()
 
+      cy.get('[data-testid="podcast-list"]')
+        // @ts-ignore
+        .toMatchImageSnapshot();
+
       cy.get('[data-testid^="list-item"]')
         .should('have.length', 10)
         .then(async (listItems) =>
