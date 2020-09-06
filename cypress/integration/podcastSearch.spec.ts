@@ -1,7 +1,7 @@
 describe('When searching for podcasts', () => {
   describe('when some results are returnted', () => {
     beforeEach(() => {
-      cy.server()
+      cy.server({ force404: true })
       cy.fixture('podcastSearchResult.json').as('mockPodcastSearchResults')
       cy.route('GET', 'https://listen-api.listennotes.com/api/v2/search?type=podcast&q=*', '@mockPodcastSearchResults').as('podcastSearchResults')
     })
@@ -17,9 +17,11 @@ describe('When searching for podcasts', () => {
       cy.get('[data-testid^="list-item"]')
         .should('have.length', 10)
         .then(async (listItems) =>
-          listItems.each((_index, listItem) =>
-            cy.wrap(listItem).within(() => cy.contains('star wars', { matchCase: false }))
-          )
+          listItems.each((_index, listItem) => {
+            cy.wrap(listItem).within(() =>
+              cy.contains('star wars', { matchCase: false }
+            ))
+          })
         )
     })
   })
