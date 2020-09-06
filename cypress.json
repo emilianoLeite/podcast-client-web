@@ -1,3 +1,7 @@
 {
-  "experimentalFetchPolyfill": true
+  "experimentalFetchPolyfill": true,
+  "ignoreTestFiles": [
+    "**/__snapshots__/*",
+    "**/__image_snapshots__/*"
+  ]
 }
