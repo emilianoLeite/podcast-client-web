@@ -1,3 +1,45 @@
+export interface PodcastEpisode {
+
+    /** Episode id. */
+    id: string;
+
+    /** Web link of this episode. */
+    link: string;
+
+    /** Audio url of this episode, which can be played directly. */
+    audio: string;
+
+    /** Image url for this podcast's artwork. If you are using PRO plan, then it's\na high */
+    image: string;
+
+    /** Episode name. */
+    title: string;
+
+    /** Thumbnail image url for this podcast's artwork (300x300). */
+    thumbnail: string;
+
+    /** Html of this episode's full description */
+    description: string;
+
+    /** Published date for this episode. In milliseconds. */
+    pub_date_ms: number;
+
+    /** The url of this episode on [ListenNotes.com](https://www.ListenNotes.com). */
+    listennotes_url: string;
+
+    /** Audio length of this episode. In seconds. */
+    audio_length_sec: number;
+
+    /** Whether this podcast contains explicit language. */
+    explicit_content: boolean;
+
+    /** Whether or not this episode's audio is invalid. Podcasters may delete the original audio. */
+    maybe_audio_invalid: boolean;
+
+    /** Edit url of this episode where you can update the audio url if you find the audio is broken.*/
+    listennotes_edit_url: string;
+}
+
 export interface PodcastDetails {
 
   /** Podcast id. */
@@ -67,47 +109,7 @@ export interface PodcastDetails {
   /** Website url of this podcast. */
   website: string;
 
-  episodes: {
-
-    /** Episode id. */
-    id: string;
-
-    /** Web link of this episode. */
-    link: string;
-
-    /** Audio url of this episode, which can be played directly. */
-    audio: string;
-
-    /** Image url for this podcast's artwork. If you are using PRO plan, then it's\na high */
-    image: string;
-
-    /** Episode name. */
-    title: string;
-
-    /** Thumbnail image url for this podcast's artwork (300x300). */
-    thumbnail: string;
-
-    /** Html of this episode's full description */
-    description: string;
-
-    /** Published date for this episode. In milliseconds. */
-    pub_date_ms: number;
-
-    /** The url of this episode on [ListenNotes.com](https://www.ListenNotes.com). */
-    listennotes_url: string;
-
-    /** Audio length of this episode. In seconds. */
-    audio_length_sec: number;
-
-    /** Whether this podcast contains explicit language. */
-    explicit_content: boolean;
-
-    /** Whether or not this episode's audio is invalid. Podcasters may delete the original audio. */
-    maybe_audio_invalid: boolean;
-
-    /** Edit url of this episode where you can update the audio url if you find the audio is broken.*/
-    listennotes_edit_url: string;
-  }[];
+  episodes: PodcastEpisode[];
 
   /** The language of this podcast. You can get all supported languages from `GET /languages`. */
   language: string;
