@@ -4,7 +4,7 @@ import { currentUserRecord } from "../../shared/firebase";
 import { User } from "../../shared/firebase/entities";
 import { PrivateContext } from "../../context/Auth";
 import { PodcastDetails } from "../../types/Podcast";
-import { SubscribedPodcasts } from "../dumb/SubscribedPodcasts";
+import { SubscribedPodcasts } from "./SubscribedPodcasts";
 
 function noPodcastsMesssage() {
   // TODO: Arrumar este "flicker" com React.Suspense
@@ -35,10 +35,10 @@ const Home: React.FC = () => {
   }, [currentUser.uid]);
 
   React.useEffect(() => {
-    const podcastsIds = userData?.podcasts_ids || [];
-    if (podcastsIds.length > 0) {
+    const podcastIds = userData?.podcastIds || [];
+    if (podcastIds.length > 0) {
       Promise
-        .all(podcastsIds.map(fetchPodcast))
+        .all(podcastIds.map(fetchPodcast))
         .then(setPodcasts);
     }
   }, [userData]);
