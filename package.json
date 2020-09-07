@@ -35,6 +35,7 @@
     "cypress-plugin-snapshots": "^1.4.4",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
+    "idb": "4.0.0",
     "typescript": "latest"
   },
   "husky": {

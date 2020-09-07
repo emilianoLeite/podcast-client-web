@@ -1,0 +1,26 @@
+{
+  "kind": "identitytoolkit#GetAccountInfoResponse",
+  "users": [
+    {
+      "localId": "qcZn3WYuyJO8Pf0hfaz8lnPlVrq1",
+      "email": "leiteemiliano@gmail.com",
+      "displayName": "Emiliano Leite",
+      "photoUrl": "https: //lh3.googleusercontent.com/a-/AOh14GhSWPmGc6yiSw9GtcaJLKvwS199o8D4wFVDvHXGVA",
+      "emailVerified": true,
+      "providerUserInfo": [
+        {
+          "providerId": "google.com",
+          "displayName": "Emiliano Leite",
+          "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GhSWPmGc6yiSw9GtcaJLKvwS199o8D4wFVDvHXGVA",
+          "federatedId": "111746851974979216149",
+          "email": "leiteemiliano@gmail.com",
+          "rawId": "111746851974979216149"
+        }
+      ],
+      "validSince": "1598921593",
+      "lastLoginAt": "1599517770203",
+      "createdAt": "1598921593275",
+      "lastRefreshAt": "2020-09-07T22:29:30.203Z"
+    }
+  ]
+}

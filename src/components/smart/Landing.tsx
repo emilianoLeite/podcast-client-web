@@ -3,7 +3,7 @@ import React from "react";
 import PodcastSearch from "./PodcastSearch";
 import PodcastList from "../dumb/PodcastList";
 import { PodcastSearchResult } from "../../types/Podcast";
-import { subscribe } from "../../shared/firebase";
+import { auth, subscribe } from "../../shared/firebase";
 import { PublicContext, Public } from "../../context/Auth";
 
 
@@ -29,6 +29,7 @@ const Landing: React.FC = () => {
 
   return (
     <div>
+      <span>{auth.currentUser ? JSON.stringify(auth.currentUser) : "not logged in" }</span>
       <h1>Home</h1>
       <PodcastSearch handleSearchResults={setPodcastsList} />
 
