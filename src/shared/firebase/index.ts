@@ -58,3 +58,9 @@ export const subscribe = (podcast: { id: string }, userId: User["id"]) => {
     podcasts_ids: firebase.firestore.FieldValue.arrayUnion(podcast.id),
   });
 };
+
+export const addToPlayQueue = (episode: { id: string }, userId: User["id"]) => {
+  currentUserRecord(userId).update({
+    playQueue: firebase.firestore.FieldValue.arrayUnion(episode.id),
+  });
+};

@@ -3,7 +3,7 @@ import { PodcastSearchResult } from "../../types/Podcast";
 
 interface Props {
   podcasts: PodcastSearchResult["results"];
-  handleSubscription?: (podcast: PodcastSearchResult["results"][0]) => void;
+  handleSubscription?: (podcast: Props["podcasts"][0]) => void;
 }
 
 const PodcastList: React.FC<Props> = ({ podcasts, handleSubscription }) => {

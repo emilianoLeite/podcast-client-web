@@ -1,9 +1,10 @@
 import React from "react";
-import { PodcastDetails } from "../../types/Podcast";
-import { msToLocaleString } from "../../shared/utils/date";
+import { PodcastDetails, PodcastEpisode } from "../../types/Podcast";
+import { EpisodeItem } from "./EpisodeItem";
 
 interface Props {
   podcasts: PodcastDetails[];
+  onAddToQueue?: (episode: PodcastEpisode) => void;
 }
 
 function latestsEpisodes(podcasts: PodcastDetails[]) {
@@ -17,14 +18,14 @@ function latestsEpisodes(podcasts: PodcastDetails[]) {
   });
 }
 
-export function LatestSubscribedEpisodes({ podcasts }: Props) {
+export function LatestSubscribedEpisodes({ podcasts, onAddToQueue }: Props) {
   return (
     <React.Fragment>
       <h2> Latest Episodes</h2>
       <ul>
         {latestsEpisodes(podcasts).map(({ title, latestEpisode }) => (
           <li key={latestEpisode.id}>
-            [{msToLocaleString(latestEpisode.pub_date_ms)}] - {title} - {latestEpisode.title}
+            <EpisodeItem episode={latestEpisode} podcastTitle={title} onAddToQueue={onAddToQueue}/>
           </li>
         ))}
       </ul>
