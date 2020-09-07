@@ -29,7 +29,7 @@ const userConverter: firebase.firestore.FirestoreDataConverter<User> = {
     const data = snapshot.data(options);
     return {
       id: snapshot.id,
-      podcasts_ids: data.podcasts_ids,
+      podcastIds: data.podcastIds,
     };
   },
 };
@@ -55,7 +55,7 @@ export const currentUserRecord = (userAuthId: firebase.User["uid"]) => {
 
 export const subscribe = (podcast: { id: string }, userId: User["id"]) => {
   currentUserRecord(userId).update({
-    podcasts_ids: firebase.firestore.FieldValue.arrayUnion(podcast.id),
+    podcastIds: firebase.firestore.FieldValue.arrayUnion(podcast.id),
   });
 };
 
