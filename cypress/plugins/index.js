@@ -1,4 +1,7 @@
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+const admin = require("firebase-admin");
+const cypressFirebasePlugin = require("cypress-firebase").plugin;
+
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -17,6 +20,9 @@ const { initPlugin } = require('cypress-plugin-snapshots/plugin');
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  initPlugin(on, config);
-  return config;
+  const extendedConfig = cypressFirebasePlugin(on, config, admin);
+
+  initPlugin(on, extendedConfig);
+
+  return extendedConfig;
 };

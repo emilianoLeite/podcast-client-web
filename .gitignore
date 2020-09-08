@@ -1,2 +1,4 @@
 node_modules/
 yarn-error*
+cypress.env.json
+serviceAccount.json
