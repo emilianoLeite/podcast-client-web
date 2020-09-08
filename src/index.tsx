@@ -7,6 +7,7 @@ import Navbar from "./components/dumb/Navbar";
 import { Landing, Home } from "./components/smart";
 import "./styles.css";
 import PodcastShow from "./components/smart/PodcastShow";
+import { auth } from "./shared/firebase";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState<CurrentUser>();
@@ -21,6 +22,12 @@ function App() {
     setCurrentUser(undefined);
     setLoggedIn(false);
   };
+
+  React.useEffect(() => {
+    return auth.onAuthStateChanged(
+      (user) => user ? login(user) : logout()
+    );
+  }, []);
 
   const publicAuth = { currentUser, setCurrentUser, login, loggedIn };
 

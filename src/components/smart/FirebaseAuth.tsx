@@ -2,39 +2,25 @@ import React from "react";
 import { auth as googleAuth } from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { PublicContext } from "../../context/Auth";
-
 import { auth } from "../../shared/firebase";
-import { Redirect } from "react-router-dom";
 
 const FirebaseAuth: React.FC = () => {
-  const { login, loggedIn } = React.useContext(PublicContext);
+  const { loggedIn } = React.useContext(PublicContext);
 
   const uiConfig = {
     signInFlow: "popup",
-    signInSuccessUrl: "", // not used
+    signInSuccessUrl: "/home",
     signInOptions: [googleAuth.GoogleAuthProvider.PROVIDER_ID],
-    callbacks: {
-      signInSuccessWithAuthResult: ({ user }: { user: { uid: string } }) => {
-        login(user);
-        return false; // Avoid firebase's default redirect after successful sign-in.
-      },
-    },
   };
 
-  if (loggedIn) {
-    // isso só redireciona uma vez, apesar de parecer que este componente não
-    // deixa de ser renderizado, uma vez que o`loggedIn` fica true "pra sempre"
-    return <Redirect to="/home" />;
+  // I can't return the JSX directly because I get an
+  // "Could not find the FirebaseUI widget element on the page." error
+  const firebaseButton = <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>;
+
+  if (!loggedIn) {
+    return firebaseButton;
   } else {
-    // TODO: investigate *how* the component hides itself. Additionally, figure
-    // out if we can control this behaviour.
-    return (
-      <StyledFirebaseAuth
-        // uiCallback={ui => ui.disableAutoSignIn()}
-        uiConfig={uiConfig}
-        firebaseAuth={auth}
-      />
-    );
+    return null;
   }
 };
 
