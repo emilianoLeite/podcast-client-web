@@ -16,7 +16,13 @@ describe('When searching for podcasts', () => {
 
       cy.get('[data-testid="podcast-list"]')
         // @ts-ignore
-        .toMatchImageSnapshot();
+        .toMatchImageSnapshot({
+          imageConfig: {
+            createDiffImage: true,
+            threshold: 0.05,
+            thresholdType: "percent",
+          }
+        });
 
       cy.get('[data-testid^="list-item"]')
         .should('have.length', 10)
