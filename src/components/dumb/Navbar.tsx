@@ -9,7 +9,7 @@ const privateLinks = () => <React.Fragment>
   | <Link to="/play_queue">Play Queue</Link>{" "}
 </React.Fragment>;
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   const { currentUser } = useContext(PublicContext);
 
   return (
@@ -19,5 +19,3 @@ const Navbar: React.FC = () => {
     </nav>
   );
 };
-
-export default Navbar;
