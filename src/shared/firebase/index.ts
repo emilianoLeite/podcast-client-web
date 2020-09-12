@@ -25,11 +25,12 @@ const userConverter: firebase.firestore.FirestoreDataConverter<User> = {
   // TODO: fazer uma implementação real
   toFirestore: (...args) => args,
 
-  fromFirestore: (snapshot, options) => {
+  fromFirestore: (snapshot, options): Required<User> => {
     const data = snapshot.data(options);
     return {
       id: snapshot.id,
       podcastIds: data.podcastIds,
+      playQueue: data.playQueue,
     };
   },
 };
