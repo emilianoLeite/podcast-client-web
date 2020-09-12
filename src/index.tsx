@@ -1,15 +1,15 @@
-import * as React from "react";
+import "./styles.css";
+import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { PublicContext, CurrentUser, PrivateContext } from "./context/Auth";
 import Navbar from "./components/dumb/Navbar";
-import { Landing, Home } from "./components/smart";
-import "./styles.css";
-import PodcastShow from "./components/smart/PodcastShow";
+import { Landing, Home } from "./components/smart/pages";
+import { PodcastShow } from "./components/smart/pages/PodcastShow";
 import { auth } from "./shared/firebase";
 
-function App() {
+const App = () => {
   const [currentUser, setCurrentUser] = React.useState<CurrentUser>();
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
 
@@ -62,7 +62,7 @@ function App() {
       </PublicContext.Provider>
     </React.StrictMode>
   );
-}
+};
 
 const rootElement = document.getElementById("root");
 render(<App />, rootElement);

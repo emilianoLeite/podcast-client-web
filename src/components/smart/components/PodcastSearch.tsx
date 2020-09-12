@@ -1,5 +1,5 @@
 import React from "react";
-import { PodcastSearchResult } from "../../types/Podcast";
+import { PodcastSearchResult } from "../../../types/Podcast";
 
 interface Props {
   handleSearchResults: (podcasts: PodcastSearchResult["results"]) => void;
