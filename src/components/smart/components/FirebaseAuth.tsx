@@ -1,8 +1,8 @@
 import React from "react";
 import { auth as googleAuth } from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { PublicContext } from "../../context/Auth";
-import { auth } from "../../shared/firebase";
+import { PublicContext } from "../../../context/Auth";
+import { auth } from "../../../shared/firebase";
 
 const FirebaseAuth: React.FC = () => {
   const { loggedIn } = React.useContext(PublicContext);

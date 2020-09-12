@@ -7,7 +7,7 @@ interface Props {
   onAddToQueue?: (episode: PodcastEpisode) => void;
 }
 
-function latestsEpisodes(podcasts: PodcastDetails[]) {
+const latestsEpisodes = (podcasts: PodcastDetails[]) => {
   return podcasts.map((podcast) => {
     const latestEpisode = [...podcast.episodes]
       .sort((epi1, epi2) => epi2.pub_date_ms - epi1.pub_date_ms)[0];
@@ -16,9 +16,9 @@ function latestsEpisodes(podcasts: PodcastDetails[]) {
       latestEpisode,
     };
   });
-}
+};
 
-export function LatestSubscribedEpisodes({ podcasts, onAddToQueue }: Props) {
+export const LatestSubscribedEpisodes = ({ podcasts, onAddToQueue }: Props) => {
   return (
     <React.Fragment>
       <h2> Latest Episodes</h2>
@@ -31,4 +31,4 @@ export function LatestSubscribedEpisodes({ podcasts, onAddToQueue }: Props) {
       </ul>
     </React.Fragment>
   );
-}
+};

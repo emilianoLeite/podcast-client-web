@@ -1,10 +1,10 @@
 import React from "react";
 
-import PodcastSearch from "./PodcastSearch";
-import PodcastList from "../dumb/PodcastList";
-import { PodcastSearchResult } from "../../types/Podcast";
-import { subscribe } from "../../shared/firebase";
-import { PublicContext, Public } from "../../context/Auth";
+import PodcastSearch from "../components/PodcastSearch";
+import PodcastList from "../../dumb/PodcastList";
+import { PodcastSearchResult } from "../../../types/Podcast";
+import { subscribe } from "../../../shared/firebase";
+import { PublicContext, Public } from "../../../context/Auth";
 
 
 const podcastList = (
@@ -23,7 +23,7 @@ const podcastList = (
   }
 };
 
-const Landing: React.FC = () => {
+export const Landing: React.FC = () => {
   const [podcastsList, setPodcastsList] = React.useState<PodcastSearchResult["results"]>([]);
   const { currentUser } = React.useContext(PublicContext);
 
@@ -36,5 +36,3 @@ const Landing: React.FC = () => {
     </div>
   );
 };
-
-export default Landing;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import FirebaseAuth from "../smart/FirebaseAuth";
+import FirebaseAuth from "../smart/components/FirebaseAuth";
 import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {

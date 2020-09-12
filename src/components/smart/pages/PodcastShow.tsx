@@ -1,12 +1,12 @@
 
 import React from "react";
 import { useParams } from "react-router-dom";
-import { PodcastDetails } from "../../types/Podcast";
-import { EpisodeItem } from "../dumb/EpisodeItem";
+import { PodcastDetails } from "../../../types/Podcast";
+import { EpisodeItem } from "../../dumb/EpisodeItem";
 
 
 // TODO: receive podcast as prop
-const PodcastShow = () => {
+export const PodcastShow = () => {
   const { id } = useParams();
   const [podcast, setPodcast] = React.useState<PodcastDetails>();
   React.useEffect(() => {
@@ -33,5 +33,3 @@ const PodcastShow = () => {
   </React.Fragment>
     : <h3> Loading... </h3>;
 };
-
-export default PodcastShow;

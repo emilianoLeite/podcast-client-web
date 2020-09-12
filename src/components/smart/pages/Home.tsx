@@ -1,17 +1,16 @@
 import React from "react";
 
-import { currentUserRecord } from "../../shared/firebase";
-import { User } from "../../shared/firebase/entities";
-import { PrivateContext } from "../../context/Auth";
-import { PodcastDetails } from "../../types/Podcast";
-import { SubscribedPodcasts } from "./SubscribedPodcasts";
+import { currentUserRecord } from "../../../shared/firebase";
+import { User } from "../../../shared/firebase/entities";
+import { PrivateContext } from "../../../context/Auth";
+import { PodcastDetails } from "../../../types/Podcast";
+import { SubscribedPodcasts } from "../components";
 
-function noPodcastsMesssage() {
-  // TODO: Arrumar este "flicker" com React.Suspense
-  return <h2> Você não está inscrito em nenhum podcast </h2>;
-}
 
-function fetchPodcast(podcastId: string) {
+// TODO: Arrumar este "flicker" com React.Suspense
+const noPodcastsMesssage = () => <h2> Você não está inscrito em nenhum podcast </h2>;
+
+const fetchPodcast = (podcastId: string) => {
 
   return fetch(`https://listen-api.listennotes.com/api/v2/podcasts/${podcastId}`, {
     method: "GET",
@@ -21,9 +20,9 @@ function fetchPodcast(podcastId: string) {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   }).then(response => response.json());
-}
+};
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const { currentUser } = React.useContext(PrivateContext);
   const [podcasts, setPodcasts] = React.useState<PodcastDetails[]>([]);
   const [userData, setUserData] = React.useState<User>();
@@ -50,5 +49,3 @@ const Home: React.FC = () => {
     </React.Fragment>
   );
 };
-
-export default Home;

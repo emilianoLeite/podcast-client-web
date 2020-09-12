@@ -8,11 +8,11 @@ interface Props {
   onAddToQueue?: (episode: PodcastEpisode) => void;
 }
 
-export function EpisodeItem({ episode, podcastTitle, onAddToQueue }: Props) {
+export const EpisodeItem = ({ episode, podcastTitle, onAddToQueue }: Props) => {
   return <React.Fragment>
     <span>
       [{msToLocaleString(episode.pub_date_ms)}] {podcastTitle ? `- ${podcastTitle} - ` : ""}{episode.title}
     </span>
     {onAddToQueue ? <button onClick={() => onAddToQueue(episode)}> Add to play queue </button> : null }
   </React.Fragment>;
-}
+};

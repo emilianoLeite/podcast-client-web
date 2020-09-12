@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { LatestSubscribedEpisodes } from "../dumb/LatestSubscribedEpisodes";
-import { PodcastDetails, PodcastEpisode } from "../../types/Podcast";
-import { addToPlayQueue } from "../../shared/firebase";
-import { PrivateContext } from "../../context/Auth";
+import { LatestSubscribedEpisodes } from "../../dumb/LatestSubscribedEpisodes";
+import { PodcastDetails, PodcastEpisode } from "../../../types/Podcast";
+import { addToPlayQueue } from "../../../shared/firebase";
+import { PrivateContext } from "../../../context/Auth";
 
 interface Props {
   podcasts: PodcastDetails[];
 }
-export function SubscribedPodcasts({ podcasts }: Props) {
+export const SubscribedPodcasts = ({ podcasts }: Props) => {
   const { currentUser } = useContext(PrivateContext);
 
-  function handleAddToQueue(episode: PodcastEpisode) {
+  const handleAddToQueue = (episode: PodcastEpisode) => {
     addToPlayQueue(episode, currentUser.uid);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -31,4 +31,4 @@ export function SubscribedPodcasts({ podcasts }: Props) {
       <LatestSubscribedEpisodes podcasts={podcasts} onAddToQueue={handleAddToQueue}/>
     </React.Fragment>
   );
-}
+};
