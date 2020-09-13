@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { LatestSubscribedEpisodes } from "../../dumb/LatestSubscribedEpisodes";
 import { PodcastDetails, PodcastEpisode } from "../../../types/Podcast";
-import { addToPlayQueue } from "../../../shared/firebase";
 import { PrivateContext } from "../../../context/Auth";
 
 interface Props {
@@ -12,7 +11,7 @@ export const SubscribedPodcasts = ({ podcasts }: Props) => {
   const { currentUser } = useContext(PrivateContext);
 
   const handleAddToQueue = (episode: PodcastEpisode) => {
-    addToPlayQueue(episode, currentUser.uid);
+    currentUser.addToPlayQueue(episode);
   };
 
   return (
