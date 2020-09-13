@@ -53,15 +53,16 @@ export const currentUserRecord = (userAuthId: firebase.User["uid"]) => {
 // ser igual ao user.id (entidade)?
 // Por enquanto estou deixando isso "explícito" somente no userConverter acima
 
+export const firestoreFunctions = (userId: User["id"]) => ({
+  subscribe: (podcast: { id: string }) => {
+    currentUserRecord(userId).update({
+      podcastIds: firebase.firestore.FieldValue.arrayUnion(podcast.id),
+    });
+  },
 
-export const subscribe = (podcast: { id: string }, userId: User["id"]) => {
-  currentUserRecord(userId).update({
-    podcastIds: firebase.firestore.FieldValue.arrayUnion(podcast.id),
-  });
-};
-
-export const addToPlayQueue = (episode: { id: string }, userId: User["id"]) => {
-  currentUserRecord(userId).update({
-    playQueue: firebase.firestore.FieldValue.arrayUnion(episode.id),
-  });
-};
+  addToPlayQueue: (episode: { id: string }) => {
+    currentUserRecord(userId).update({
+      playQueue: firebase.firestore.FieldValue.arrayUnion(episode.id),
+    });
+  },
+});

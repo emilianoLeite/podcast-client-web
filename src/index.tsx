@@ -3,18 +3,21 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { PublicContext, CurrentUser, PrivateContext } from "./context/Auth";
+import { PublicContext, CurrentUser, PrivateContext, FirebaseUser } from "./context/Auth";
 import { Navbar }from "./components/dumb/Navbar";
 import { Landing, Home, PlayQueue } from "./components/smart/pages";
 import { PodcastShow } from "./components/smart/pages/PodcastShow";
-import { auth } from "./shared/firebase";
+import { auth, firestoreFunctions } from "./shared/firebase";
 
 const App = () => {
   const [currentUser, setCurrentUser] = React.useState<CurrentUser>();
   const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
 
-  const login = (user: CurrentUser) => {
-    setCurrentUser(user);
+  const login = (user: FirebaseUser) => {
+    setCurrentUser({
+      ...user,
+      ...firestoreFunctions(user.uid),
+    });
     setLoggedIn(true);
   };
 

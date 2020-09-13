@@ -1,17 +1,21 @@
 import { createContext } from "react";
+import { firestoreFunctions } from "../shared/firebase";
+
+export type FirebaseUser = {
+  uid: string;
+  name?: string;
+}
+type FirestoreFunctions = ReturnType<typeof firestoreFunctions>
+
+export type CurrentUser = FirebaseUser & FirestoreFunctions
 
 export interface Private {
-  currentUser: {
-    uid: string;
-    name?: string;
-  };
+  currentUser: CurrentUser;
   logout: () => void;
 }
 
-export type CurrentUser = Private["currentUser"];
-
 export interface Public {
-  login: (user: CurrentUser) => void;
+  login: (user: FirebaseUser) => void;
   loggedIn: boolean; // necessary to redirect from Public to Private route upon login
   currentUser: Maybe<CurrentUser>; // necessary to "enhance" Public pages with logged-in functionality
 }

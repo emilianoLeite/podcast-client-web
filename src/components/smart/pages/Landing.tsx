@@ -3,7 +3,6 @@ import React from "react";
 import PodcastSearch from "../components/PodcastSearch";
 import PodcastList from "../../dumb/PodcastList";
 import { PodcastSearchResult } from "../../../types/Podcast";
-import { subscribe } from "../../../shared/firebase";
 import { PublicContext, Public } from "../../../context/Auth";
 
 
@@ -14,7 +13,7 @@ const podcastList = (
   if (currentUser) {
     return (
       <PodcastList
-        handleSubscription={(podcast) => subscribe(podcast, currentUser.uid)}
+        handleSubscription={(podcast) => currentUser.subscribe(podcast)}
         podcasts={podcastsList}
       />
     );
