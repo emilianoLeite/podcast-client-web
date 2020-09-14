@@ -65,4 +65,10 @@ export const firestoreFunctions = (userId: User["id"]) => ({
       playQueue: firebase.firestore.FieldValue.arrayUnion(episode.id),
     });
   },
+
+  updatePlayQueue: (playQueue: NonNullable<User["playQueue"]>) => {
+    currentUserRecord(userId).set({
+      playQueue,
+    } as User, { merge: true });
+  },
 });
