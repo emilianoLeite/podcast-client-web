@@ -3,7 +3,7 @@ import { User } from "../../../shared/firebase/entities";
 import { currentUserRecord } from "../../../shared/firebase";
 import { PrivateContext } from "../../../context/Auth";
 
-export const useUserData = () => {
+export const useCurrentUser = () => {
   const { currentUser } = useContext(PrivateContext);
   const [userData, setUserData] = useState<User>();
 
@@ -13,5 +13,8 @@ export const useUserData = () => {
     );
   }, [currentUser.uid]);
 
-  return userData;
+  return {
+    currentUser,
+    userData,
+  };
 };
