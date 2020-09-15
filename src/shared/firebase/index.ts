@@ -20,17 +20,14 @@ export const auth = firebaseInstance.auth();
 
 const userConverter: firebase.firestore.FirestoreDataConverter<UserData> = {
   // acho que este toFirestore serve só pra fazer ações de #set, não de #update
-  // como ainda não estou usando #set em lugar algum, vou deixar como uma função
-  // pass-through
-  // TODO: fazer uma implementação real
-  toFirestore: (...args) => args,
+  toFirestore: (user) => user,
 
   fromFirestore: (snapshot, options): UserData => {
     const data = snapshot.data(options);
     return {
       id: snapshot.id,
-      podcastIds: data.podcastIds,
-      playQueue: data.playQueue,
+      podcastIds: data.podcastIds || [],
+      playQueue: data.playQueue || [],
     };
   },
 };
