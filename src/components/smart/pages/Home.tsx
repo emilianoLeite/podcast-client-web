@@ -1,14 +1,14 @@
 import React from "react";
 
 import { SubscribedPodcasts } from "../components/SubscribedPodcasts";
-import { useUserData } from "../hooks/useUserData";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 import { useSubscribedPodcasts } from "../hooks/useSubscribedPodcasts";
 
 // TODO: Arrumar este "flicker" com React.Suspense
 const noPodcastsMesssage = () => <h2> Você não está inscrito em nenhum podcast </h2>;
 
 export const Home: React.FC = () => {
-  const userData = useUserData();
+  const { userData } = useCurrentUser();
   const podcasts = useSubscribedPodcasts(userData);
 
   return (

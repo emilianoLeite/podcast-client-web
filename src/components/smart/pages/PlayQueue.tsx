@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserData } from "../hooks/useUserData";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 import { DragDropContext, Droppable, Draggable, DraggableProvidedDraggableProps, DropResult } from "react-beautiful-dnd";
 
 // a little function to help us with reordering the result
@@ -30,7 +30,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: DraggableProvidedDrag
 });
 
 export const PlayQueue = () => {
-  const userData = useUserData();
+  const { userData } = useCurrentUser();
   const playQueue = userData?.playQueue;
   const [items, setItems] = React.useState(playQueue);
   React.useEffect(() => {
