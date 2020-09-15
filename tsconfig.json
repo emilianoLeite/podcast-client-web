@@ -7,18 +7,19 @@
       "dom",
       "es2015"
     ],
-    "jsx": "preserve",
-    "target": "es5",
     "allowJs": false,
-    "skipLibCheck": false,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "node",
+    "noEmit": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "skipLibCheck": false,
+    "strict": true,
+    "target": "es5",
   }
 }
