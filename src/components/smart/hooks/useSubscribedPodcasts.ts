@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User } from "../../../shared/firebase/entities";
+import { UserData } from "../../../shared/firebase/interfaces";
 import { PodcastDetails } from "../../../types/Podcast";
 
 const fetchPodcast = (podcastId: string) => {
@@ -14,7 +14,7 @@ const fetchPodcast = (podcastId: string) => {
   }).then(response => response.json());
 };
 
-export const useSubscribedPodcasts = (userData?: User) => {
+export const useSubscribedPodcasts = (userData?: UserData) => {
   const [podcasts, setPodcasts] = useState<PodcastDetails[]>([]);
 
   useEffect(() => {

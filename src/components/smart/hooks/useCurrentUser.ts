@@ -1,15 +1,15 @@
 import { useEffect, useState, useContext } from "react";
-import { User } from "../../../shared/firebase/entities";
+import { UserData } from "../../../shared/firebase/interfaces";
 import { currentUserRecord } from "../../../shared/firebase";
 import { PrivateContext } from "../../../context/Auth";
 
 export const useCurrentUser = () => {
   const { currentUser } = useContext(PrivateContext);
-  const [userData, setUserData] = useState<User>();
+  const [userData, setUserData] = useState<UserData>();
 
   useEffect(() => {
     return currentUserRecord(currentUser.uid).onSnapshot(
-      doc => setUserData(doc.data() as User)
+      doc => setUserData(doc.data() as UserData)
     );
   }, [currentUser.uid]);
 
