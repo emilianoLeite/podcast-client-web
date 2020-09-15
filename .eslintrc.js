@@ -8,6 +8,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    'plugin:styled-components-a11y/recommended',
   ],
   "globals": {
     "Atomics": "readonly",
@@ -25,7 +26,9 @@ module.exports = {
   "plugins": [
     "react",
     "react-hooks",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    'jsx-a11y',
+    'styled-components-a11y'
   ],
   "rules": {
     "indent": ["error", 2],

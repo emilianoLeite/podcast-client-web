@@ -38,6 +38,8 @@
     "cypress-plugin-snapshots": "^1.4.4",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-styled-components-a11y": "^0.0.16",
     "firebase-admin": "^9.1.1",
     "typescript": "latest"
   },
