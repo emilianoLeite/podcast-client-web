@@ -1,7 +1,7 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { User } from "./entities";
+import { UserData } from "./interfaces";
 
 const firebaseInstance = firebase.initializeApp({
   apiKey: "AIzaSyADf8s9TqPGHjucv_lzgO9wMzAdpoKZNzE",
@@ -18,14 +18,14 @@ export default firebaseInstance;
 export const database = firebaseInstance.firestore();
 export const auth = firebaseInstance.auth();
 
-const userConverter: firebase.firestore.FirestoreDataConverter<User> = {
+const userConverter: firebase.firestore.FirestoreDataConverter<UserData> = {
   // acho que este toFirestore serve só pra fazer ações de #set, não de #update
   // como ainda não estou usando #set em lugar algum, vou deixar como uma função
   // pass-through
   // TODO: fazer uma implementação real
   toFirestore: (...args) => args,
 
-  fromFirestore: (snapshot, options): Required<User> => {
+  fromFirestore: (snapshot, options): UserData => {
     const data = snapshot.data(options);
     return {
       id: snapshot.id,
@@ -53,7 +53,7 @@ export const currentUserRecord = (userAuthId: firebase.User["uid"]) => {
 // ser igual ao user.id (entidade)?
 // Por enquanto estou deixando isso "explícito" somente no userConverter acima
 
-export const firestoreFunctions = (userId: User["id"]) => ({
+export const firestoreFunctions = (userId: UserData["id"]) => ({
   subscribe: (podcast: { id: string }) => {
     currentUserRecord(userId).update({
       podcastIds: firebase.firestore.FieldValue.arrayUnion(podcast.id),
@@ -66,9 +66,9 @@ export const firestoreFunctions = (userId: User["id"]) => ({
     });
   },
 
-  updatePlayQueue: (playQueue: NonNullable<User["playQueue"]>) => {
+  updatePlayQueue: (playQueue: UserData["playQueue"]) => {
     currentUserRecord(userId).set({
       playQueue,
-    } as User, { merge: true });
+    } as UserData, { merge: true });
   },
 });
